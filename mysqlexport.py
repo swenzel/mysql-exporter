@@ -35,15 +35,15 @@ def ensure_cursor(cursor: Optional[DictCursor]=None) -> DictCursor:
 
 def get_config() -> Dict:
     conf_file = pathlib.Path('mysqlexport.yml')
-    if conf_file.exists:
+    if conf_file.exists():
         return yaml.safe_load(conf_file.read_text())
 
     conf_file = pathlib.Path('mysqlexport.yaml')
-    if conf_file.exists:
+    if conf_file.exists():
         return yaml.safe_load(conf_file.read_text())
 
     conf_file = pathlib.Path('mysqlexport.json')
-    if conf_file.exists:
+    if conf_file.exists():
         return yaml.safe_load(conf_file.read_text())
 
     return {}
@@ -124,6 +124,7 @@ def dump_database(database, output_format: str="plain"):
     tables = select_tables(database)
     extension = get_extension(output_format)
     curs = ensure_cursor()
+    pathlib.Path(database).mkdir(exist_ok=True)
     for table in tables:
         database, table = table["Database"], table["Table"]
         output_file = f'{database}/{table}{extension}'
