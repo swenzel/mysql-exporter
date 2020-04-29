@@ -3,10 +3,11 @@ from setuptools import setup
 setup(
     name='mysql_exporter',
     version='0.0.1',
-    install_requires=[ "pymysql~=0.9", "click~=7.0", "pyyaml~=5.1" ],
+    install_requires=["pymysql~=0.9", "click~=7.0", "pyyaml~=5.1"],
     python_requires='>=3.6.*, <4',
+    py_modules=["mysqlexport"],
     entry_points={
-        "console_scripts":["mysqlexport=mysqlexport:main"]
+        "console_scripts": ["mysqlexport=mysqlexport:main"]
     },
     classifiers=[
         # Optional
